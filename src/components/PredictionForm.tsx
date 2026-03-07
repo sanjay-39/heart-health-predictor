@@ -8,6 +8,7 @@ interface PredictionFormProps {
 }
 
 const PredictionForm = ({ onSubmit }: PredictionFormProps) => {
+  const [patientName, setPatientName] = useState('');
   const [form, setForm] = useState<PatientData>({
     age: 50, sex: 1, cp: 0, trestbps: 130, chol: 220,
     fbs: 0, restecg: 0, thalach: 150, exang: 0, oldpeak: 1.0,
