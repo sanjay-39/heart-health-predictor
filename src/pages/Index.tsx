@@ -7,7 +7,7 @@ import { predictHeartDisease, PatientData, PredictionResult } from '@/lib/predic
 import { Heart } from 'lucide-react';
 
 const Index = () => {
-  const [result, setResult] = useState<PredictionResult | null>(null);
+  const [result, setResult] = useState<PredictionResult & { patientName?: string } | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
