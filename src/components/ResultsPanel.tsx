@@ -4,7 +4,7 @@ import { PredictionResult } from '@/lib/prediction';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 
 interface ResultsPanelProps {
-  result: PredictionResult;
+  result: PredictionResult & { patientName?: string };
 }
 
 const ResultsPanel = ({ result }: ResultsPanelProps) => {
