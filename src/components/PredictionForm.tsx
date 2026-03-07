@@ -41,7 +41,7 @@ const PredictionForm = ({ onSubmit }: PredictionFormProps) => {
         </div>
 
         <form
-          onSubmit={(e) => { e.preventDefault(); onSubmit(form); }}
+          onSubmit={(e) => { e.preventDefault(); onSubmit(form, patientName); }}
           className="max-w-4xl mx-auto rounded-2xl p-8 bg-card border border-border"
           style={{ boxShadow: 'var(--shadow-card)' }}
         >
