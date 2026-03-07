@@ -7,7 +7,7 @@ import { predictHeartDisease, PatientData, PredictionResult } from '@/lib/predic
 import { Heart } from 'lucide-react';
 
 const Index = () => {
-  const [result, setResult] = useState<PredictionResult | null>(null);
+  const [result, setResult] = useState<PredictionResult & { patientName?: string } | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -15,9 +15,9 @@ const Index = () => {
     document.getElementById('prediction-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (data: PatientData) => {
+  const handleSubmit = (data: PatientData, patientName: string) => {
     const prediction = predictHeartDisease(data);
-    setResult(prediction);
+    setResult({ ...prediction, patientName });
     setTimeout(() => {
       document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);

@@ -4,10 +4,11 @@ import { Heart, Stethoscope } from 'lucide-react';
 import { PatientData } from '@/lib/prediction';
 
 interface PredictionFormProps {
-  onSubmit: (data: PatientData) => void;
+  onSubmit: (data: PatientData, patientName: string) => void;
 }
 
 const PredictionForm = ({ onSubmit }: PredictionFormProps) => {
+  const [patientName, setPatientName] = useState('');
   const [form, setForm] = useState<PatientData>({
     age: 50, sex: 1, cp: 0, trestbps: 130, chol: 220,
     fbs: 0, restecg: 0, thalach: 150, exang: 0, oldpeak: 1.0,
@@ -40,11 +41,15 @@ const PredictionForm = ({ onSubmit }: PredictionFormProps) => {
         </div>
 
         <form
-          onSubmit={(e) => { e.preventDefault(); onSubmit(form); }}
+          onSubmit={(e) => { e.preventDefault(); onSubmit(form, patientName); }}
           className="max-w-4xl mx-auto rounded-2xl p-8 bg-card border border-border"
           style={{ boxShadow: 'var(--shadow-card)' }}
         >
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="md:col-span-2 lg:col-span-3">
+              <label className={labelClass}>Patient Name</label>
+              <input type="text" className={fieldClass} value={patientName} onChange={e => setPatientName(e.target.value)} placeholder="Enter patient name" required />
+            </div>
             <div>
               <label className={labelClass}>Age</label>
               <input type="number" className={fieldClass} value={form.age} onChange={e => update('age', +e.target.value)} min={1} max={120} />

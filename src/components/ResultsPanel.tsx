@@ -4,7 +4,7 @@ import { PredictionResult } from '@/lib/prediction';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 
 interface ResultsPanelProps {
-  result: PredictionResult;
+  result: PredictionResult & { patientName?: string };
 }
 
 const ResultsPanel = ({ result }: ResultsPanelProps) => {
@@ -39,7 +39,8 @@ const ResultsPanel = ({ result }: ResultsPanelProps) => {
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-3">Prediction Results</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-1">Prediction Results</h2>
+          {result.patientName && <p className="text-lg text-muted-foreground">Patient: <span className="font-semibold text-foreground">{result.patientName}</span></p>}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
