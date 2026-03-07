@@ -4,7 +4,7 @@ import { Heart, Stethoscope } from 'lucide-react';
 import { PatientData } from '@/lib/prediction';
 
 interface PredictionFormProps {
-  onSubmit: (data: PatientData) => void;
+  onSubmit: (data: PatientData, patientName: string) => void;
 }
 
 const PredictionForm = ({ onSubmit }: PredictionFormProps) => {
