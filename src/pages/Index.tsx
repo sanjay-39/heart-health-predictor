@@ -2,12 +2,22 @@ import { useState, useRef } from 'react';
 import HeroSection from '@/components/HeroSection';
 import PredictionForm from '@/components/PredictionForm';
 import ResultsPanel from '@/components/ResultsPanel';
+import PredictionHistory, { HistoryEntry } from '@/components/PredictionHistory';
 import HowItWorks from '@/components/HowItWorks';
 import { predictHeartDisease, PatientData, PredictionResult } from '@/lib/prediction';
 import { Heart } from 'lucide-react';
 
+const HISTORY_KEY = 'cardiopredict_history';
+
+const loadHistory = (): HistoryEntry[] => {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+  } catch { return []; }
+};
+
 const Index = () => {
   const [result, setResult] = useState<PredictionResult & { patientName?: string } | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>(loadHistory);
   const formRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -18,9 +28,26 @@ const Index = () => {
   const handleSubmit = (data: PatientData, patientName: string) => {
     const prediction = predictHeartDisease(data);
     setResult({ ...prediction, patientName });
+
+    const entry: HistoryEntry = {
+      id: crypto.randomUUID(),
+      patientName: patientName || 'Unknown',
+      risk: prediction.risk,
+      label: prediction.label,
+      timestamp: new Date().toLocaleString(),
+    };
+    const updated = [entry, ...history];
+    setHistory(updated);
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
+
     setTimeout(() => {
       document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
+  };
+
+  const handleClearHistory = () => {
+    setHistory([]);
+    localStorage.removeItem(HISTORY_KEY);
   };
 
   return (
@@ -35,6 +62,7 @@ const Index = () => {
           <div className="hidden md:flex items-center gap-8 text-sm text-primary-foreground/70">
             <a href="#how-it-works" className="hover:text-primary-foreground transition-colors">How It Works</a>
             <a href="#prediction-form" className="hover:text-primary-foreground transition-colors">Predict</a>
+            <a href="#history" className="hover:text-primary-foreground transition-colors">History</a>
             <button
               onClick={handleGetStarted}
               className="px-5 py-2 rounded-lg text-primary-foreground font-medium transition-all hover:opacity-90"
@@ -50,6 +78,7 @@ const Index = () => {
       <HowItWorks />
       <PredictionForm onSubmit={handleSubmit} />
       {result && <ResultsPanel result={result} />}
+      <PredictionHistory history={history} onClear={handleClearHistory} />
 
       {/* Footer */}
       <footer className="py-12 border-t border-border bg-card">
