@@ -46,6 +46,10 @@ const PredictionForm = ({ onSubmit }: PredictionFormProps) => {
           style={{ boxShadow: 'var(--shadow-card)' }}
         >
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="md:col-span-2 lg:col-span-3">
+              <label className={labelClass}>Patient Name</label>
+              <input type="text" className={fieldClass} value={patientName} onChange={e => setPatientName(e.target.value)} placeholder="Enter patient name" required />
+            </div>
             <div>
               <label className={labelClass}>Age</label>
               <input type="number" className={fieldClass} value={form.age} onChange={e => update('age', +e.target.value)} min={1} max={120} />
