@@ -17,6 +17,7 @@ const loadHistory = (): HistoryEntry[] => {
 
 const Index = () => {
   const [result, setResult] = useState<PredictionResult & { patientName?: string } | null>(null);
+  const [lastPatientData, setLastPatientData] = useState<PatientData | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>(loadHistory);
   const formRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
