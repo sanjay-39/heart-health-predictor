@@ -31,11 +31,9 @@ const PredictionHistory = ({ history, onClear }: PredictionHistoryProps) => {
 
   return (
     <motion.section
-      id="history"
       initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="py-20"
+      animate={{ opacity: 1, y: 0 }}
+      className="py-6"
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between mb-8 max-w-4xl mx-auto">

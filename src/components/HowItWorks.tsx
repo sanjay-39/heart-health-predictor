@@ -9,7 +9,7 @@ const steps = [
 ];
 
 const HowItWorks = () => (
-  <section id="how-it-works" className="py-20 bg-secondary/50">
+  <section className="py-10 bg-secondary/50 rounded-2xl">
     <div className="container mx-auto px-6">
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-3">How It Works</h2>

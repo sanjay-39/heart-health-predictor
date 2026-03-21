@@ -24,11 +24,9 @@ const PredictionForm = ({ onSubmit }: PredictionFormProps) => {
 
   return (
     <motion.section
-      id="prediction-form"
       initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="py-20"
+      animate={{ opacity: 1, y: 0 }}
+      className="py-6"
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
