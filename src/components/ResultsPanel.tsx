@@ -9,7 +9,7 @@ interface ResultsPanelProps {
   patientData?: PatientData;
 }
 
-const ResultsPanel = ({ result }: ResultsPanelProps) => {
+const ResultsPanel = ({ result, patientData }: ResultsPanelProps) => {
   const riskConfig = {
     Low: { gradient: 'var(--gradient-risk-low)', icon: CheckCircle, color: 'hsl(152 60% 42%)' },
     Moderate: { gradient: 'var(--gradient-risk-medium)', icon: AlertTriangle, color: 'hsl(38 92% 50%)' },
