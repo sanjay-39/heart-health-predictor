@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
-import { AlertTriangle, CheckCircle, XCircle, TrendingUp } from 'lucide-react';
-import { PredictionResult } from '@/lib/prediction';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { AlertTriangle, CheckCircle, XCircle, TrendingUp, Download } from 'lucide-react';
+import { PredictionResult, PatientData } from '@/lib/prediction';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { generatePDFReport } from '@/lib/generateReport';
 
 interface ResultsPanelProps {
   result: PredictionResult & { patientName?: string };
+  patientData?: PatientData;
 }
 
 const ResultsPanel = ({ result }: ResultsPanelProps) => {
