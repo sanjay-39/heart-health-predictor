@@ -17,6 +17,7 @@ const loadHistory = (): HistoryEntry[] => {
 
 const Index = () => {
   const [result, setResult] = useState<PredictionResult & { patientName?: string } | null>(null);
+  const [lastPatientData, setLastPatientData] = useState<PatientData | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>(loadHistory);
   const formRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -28,6 +29,7 @@ const Index = () => {
   const handleSubmit = (data: PatientData, patientName: string) => {
     const prediction = predictHeartDisease(data);
     setResult({ ...prediction, patientName });
+    setLastPatientData(data);
 
     const entry: HistoryEntry = {
       id: crypto.randomUUID(),
@@ -77,7 +79,7 @@ const Index = () => {
       <HeroSection onGetStarted={handleGetStarted} />
       <HowItWorks />
       <PredictionForm onSubmit={handleSubmit} />
-      {result && <ResultsPanel result={result} />}
+      {result && <ResultsPanel result={result} patientData={lastPatientData ?? undefined} />}
       <PredictionHistory history={history} onClear={handleClearHistory} />
 
       {/* Footer */}

@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion';
-import { AlertTriangle, CheckCircle, XCircle, TrendingUp } from 'lucide-react';
-import { PredictionResult } from '@/lib/prediction';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { AlertTriangle, CheckCircle, XCircle, TrendingUp, Download } from 'lucide-react';
+import { PredictionResult, PatientData } from '@/lib/prediction';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { generatePDFReport } from '@/lib/generateReport';
 
 interface ResultsPanelProps {
   result: PredictionResult & { patientName?: string };
+  patientData?: PatientData;
 }
 
-const ResultsPanel = ({ result }: ResultsPanelProps) => {
+const ResultsPanel = ({ result, patientData }: ResultsPanelProps) => {
   const riskConfig = {
     Low: { gradient: 'var(--gradient-risk-low)', icon: CheckCircle, color: 'hsl(152 60% 42%)' },
     Moderate: { gradient: 'var(--gradient-risk-medium)', icon: AlertTriangle, color: 'hsl(38 92% 50%)' },
@@ -41,6 +43,16 @@ const ResultsPanel = ({ result }: ResultsPanelProps) => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-1">Prediction Results</h2>
           {result.patientName && <p className="text-lg text-muted-foreground">Patient: <span className="font-semibold text-foreground">{result.patientName}</span></p>}
+          {patientData && (
+            <button
+              onClick={() => generatePDFReport({ patientName: result.patientName || 'Unknown', patientData, result })}
+              className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-primary-foreground transition-all hover:scale-105 hover:shadow-lg"
+              style={{ background: 'var(--gradient-primary)' }}
+            >
+              <Download className="w-5 h-5" />
+              Download PDF Report
+            </button>
+          )}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
