@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import HeroSection from '@/components/HeroSection';
 import PredictionForm from '@/components/PredictionForm';
 import ResultsPanel from '@/components/ResultsPanel';
+import HealthRecommendations from '@/components/HealthRecommendations';
 import PredictionHistory, { HistoryEntry } from '@/components/PredictionHistory';
 import HowItWorks from '@/components/HowItWorks';
 import { predictHeartDisease, PatientData, PredictionResult } from '@/lib/prediction';
