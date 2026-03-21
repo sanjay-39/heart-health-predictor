@@ -29,6 +29,7 @@ const Index = () => {
   const handleSubmit = (data: PatientData, patientName: string) => {
     const prediction = predictHeartDisease(data);
     setResult({ ...prediction, patientName });
+    setLastPatientData(data);
 
     const entry: HistoryEntry = {
       id: crypto.randomUUID(),
