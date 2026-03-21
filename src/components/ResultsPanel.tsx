@@ -43,6 +43,16 @@ const ResultsPanel = ({ result, patientData }: ResultsPanelProps) => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-1">Prediction Results</h2>
           {result.patientName && <p className="text-lg text-muted-foreground">Patient: <span className="font-semibold text-foreground">{result.patientName}</span></p>}
+          {patientData && (
+            <button
+              onClick={() => generatePDFReport({ patientName: result.patientName || 'Unknown', patientData, result })}
+              className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-primary-foreground transition-all hover:scale-105 hover:shadow-lg"
+              style={{ background: 'var(--gradient-primary)' }}
+            >
+              <Download className="w-5 h-5" />
+              Download PDF Report
+            </button>
+          )}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
