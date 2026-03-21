@@ -81,6 +81,7 @@ const Index = () => {
       <HowItWorks />
       <PredictionForm onSubmit={handleSubmit} />
       {result && <ResultsPanel result={result} patientData={lastPatientData ?? undefined} />}
+      {result && lastPatientData && <HealthRecommendations patientData={lastPatientData} result={result} />}
       <PredictionHistory history={history} onClear={handleClearHistory} />
 
       {/* Footer */}
