@@ -1,7 +1,9 @@
-import { Heart, Home, Info, Stethoscope, History, FileText } from 'lucide-react';
+import { Heart, Home, Info, Stethoscope, History, FileText, LogOut } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { usePrediction } from '@/contexts/PredictionContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 import {
   Sidebar,
   SidebarContent,
@@ -28,7 +30,14 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
   const location = useLocation();
+  const navigate = useNavigate();
   const { history } = usePrediction();
+  const { user, signOut } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/login');
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -73,7 +82,14 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-4 space-y-2">
+        {!collapsed && user && (
+          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+        )}
+        <Button variant="ghost" size="sm" onClick={handleLogout} className="w-full justify-start text-muted-foreground hover:text-foreground">
+          <LogOut className="w-4 h-4 mr-2 shrink-0" />
+          {!collapsed && 'Logout'}
+        </Button>
         {!collapsed && (
           <p className="text-[10px] text-muted-foreground leading-tight">
             For educational purposes only. Not medical advice.
