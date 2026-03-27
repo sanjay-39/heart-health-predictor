@@ -1,7 +1,9 @@
-import { Heart, Home, Info, Stethoscope, History, FileText } from 'lucide-react';
+import { Heart, Home, Info, Stethoscope, History, FileText, LogOut } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { usePrediction } from '@/contexts/PredictionContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 import {
   Sidebar,
   SidebarContent,
