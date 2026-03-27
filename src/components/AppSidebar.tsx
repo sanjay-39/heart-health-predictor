@@ -82,7 +82,14 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-4 space-y-2">
+        {!collapsed && user && (
+          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+        )}
+        <Button variant="ghost" size="sm" onClick={handleLogout} className="w-full justify-start text-muted-foreground hover:text-foreground">
+          <LogOut className="w-4 h-4 mr-2 shrink-0" />
+          {!collapsed && 'Logout'}
+        </Button>
         {!collapsed && (
           <p className="text-[10px] text-muted-foreground leading-tight">
             For educational purposes only. Not medical advice.
