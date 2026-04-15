@@ -51,13 +51,13 @@ export const PredictionProvider = ({ children }: { children: ReactNode }) => {
     // Save to database if user is logged in
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
-      await supabase.from('predictions').insert({
+      await supabase.from('predictions').insert([{
         user_id: user.id,
         patient_name: patientName || 'Unknown',
         risk: prediction.risk,
         label: prediction.label,
         patient_data: data as unknown as Record<string, unknown>,
-      });
+      }]);
     }
   };
 
