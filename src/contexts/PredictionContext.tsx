@@ -56,7 +56,7 @@ export const PredictionProvider = ({ children }: { children: ReactNode }) => {
         patient_name: patientName || 'Unknown',
         risk: prediction.risk,
         label: prediction.label,
-        patient_data: data as unknown as Record<string, unknown>,
+        patient_data: JSON.parse(JSON.stringify(data)),
       }]);
     }
   };
